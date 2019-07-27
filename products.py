@@ -1,13 +1,23 @@
-# 讀取檔案
-products = [] # 資料是長-> ramen,250
-with open('products.csv', 'r', encoding = 'utf-8') as f:
-	for line in f:
-		if '商品,價格' in line:
-			continue # 用continue跳過寫入'商品,價格'，繼續下一個迴圈
-		name, price = line.strip().split(',') 
-		# strip把換行符號 \n, 拿掉split用逗點當作切割字串的標準
-		products.append([name, price])
-print(products)
+# 先檢查檔案在不在電腦裡，以免crash
+import os # 載入作業系統，才有權限查看
+
+# 檢查檔案
+products = []
+if os.path.isfile('products.csv'): # 用 isfile 功能檢查檔案在不在
+	print('yeah! 找到檔案！')
+	# 讀取檔案
+	# 資料是長-> ramen,250
+	with open('products.csv', 'r', encoding = 'utf-8') as f:
+		for line in f:
+			if '商品,價格' in line:
+				continue # 用continue跳過寫入'商品,價格'，繼續下一個迴圈
+			name, price = line.strip().split(',') 
+			# strip把換行符號 \n, 拿掉split用逗點當作切割字串的標準
+			products.append([name, price])
+	print(products)
+else:
+	print('找不到檔案....')
+
 
 # 讓使用者輸入
 while True:
